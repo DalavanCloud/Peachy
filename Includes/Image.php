@@ -176,6 +176,7 @@ class Image {
 		$ii = $this->imageinfo();
 
 		if( is_array( $ii ) ) {
+			$ii = $ii[0];
 
 			$this->title = $ii['canonicaltitle'];
 			$this->rawtitle = $this->wiki->removeNamespace( $this->title );
@@ -196,9 +197,9 @@ class Image {
 					$this->metadata[$metadata['name']] = $metadata['value'];
 				}
 
-			} else {
-				$this->exists = false;
-			}
+        		}
+                } else {
+                        $this->exists = false;
 		}
 
 	}
@@ -274,7 +275,7 @@ class Image {
 
 		$imageInfo = $this->wiki->listHandler( $imageInfoArray );
 		if( count( $imageInfo ) > 0 ) {
-			return $imageInfo[0];
+			return $imageInfo;
 		} else {
 			// Does not exist
 			return false;
@@ -667,7 +668,7 @@ class Image {
 		$ii = $this->imageinfo( 1, $width, $height );
 
 		if( is_array( $ii ) ) {
-			$ii = $ii;
+			$ii = $ii[0];
 
 			if( $width != -1 ) {
 				$url = $ii['thumburl'];
